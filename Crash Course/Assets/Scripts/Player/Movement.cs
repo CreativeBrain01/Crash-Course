@@ -22,15 +22,16 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Input.simulateMouseWithTouches = true;
     }
 
     private void Update()
     {
         float initialSpeed = 1f;
 
-        //Keyboard Controls
+        #region Keyboard Controls
         float x = 0, y = 0;
-        foreach(KeyCode kc in upKeys)
+        foreach (KeyCode kc in upKeys)
         {
             if (Input.GetKey(kc)) y += initialSpeed;
         }
@@ -46,12 +47,38 @@ public class Movement : MonoBehaviour
         {
             if (Input.GetKey(kc)) x -= initialSpeed;
         }
+        #endregion
 
         //Prevent use of both keyboard controls for extra speed
         x = Mathf.Clamp(x, -initialSpeed, initialSpeed); y = Mathf.Clamp(y, -initialSpeed, initialSpeed);
 
+        if (x == 0 && y == 0)
+        {
+            #region Mouse Controls
+            if (Input.GetMouseButton(0))
+            {
+                Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 dir = new Vector2(mouse.x - transform.position.x, mouse.y - transform.position.y);
+                x = Mathf.Clamp(dir.x, -initialSpeed, initialSpeed);
+                y = Mathf.Clamp(dir.y, -initialSpeed, initialSpeed);
+            }
+            #endregion
+            /*#region Touch Controls
+            if (x == 0 && y == 0)
+            {
+                if (Input.touchCount > 0)
+                {
+                    Vector2 finger = Input.GetTouch(0).position;
+                    Vector2 dir = new Vector2(finger.x - transform.position.x, finger.y - transform.position.y);
+                    x = Mathf.Clamp(dir.x, -initialSpeed, initialSpeed);
+                    y = Mathf.Clamp(dir.y, -initialSpeed, initialSpeed);
+                }
+            }
+            #endregion*/
+        }
+
         //Actually move
-        Vector2 movement = new Vector3(x, y) * speed;
+        Vector2 movement = new Vector2(x, y) * speed;
         rb.velocity = movement;
 
         //Rotate character
