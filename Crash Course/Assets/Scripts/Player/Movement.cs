@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(VehicleHandler))]
 public class Movement : MonoBehaviour
 {
     [SerializeField]
@@ -14,9 +15,6 @@ public class Movement : MonoBehaviour
     [SerializeField]
     KeyCode[] rightKeys;
 
-    [SerializeField]
-    float speed = 20.0f;
-
     Rigidbody2D rb;
 
     private void Start()
@@ -27,7 +25,7 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        float initialSpeed = 1f;
+        float initialSpeed = 2f;
 
         #region Keyboard Controls
         float x = 0, y = 0;
@@ -78,7 +76,7 @@ public class Movement : MonoBehaviour
         }
 
         //Actually move
-        Vector2 movement = new Vector2(x, y) * speed;
+        Vector2 movement = new Vector2(x, y) * GetComponent<VehicleHandler>().Speed;
         rb.velocity = movement;
 
         //Rotate character
