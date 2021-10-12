@@ -4,13 +4,62 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    public Node[] connections;
+    [SerializeField]
+    public bool isAttatchedToPlayer = false;
+    [SerializeField]
+    List<Node> staticConnections = new List<Node>();
+
+    float detectionDist = 4;
+    bool inPlayerRange { 
+        get 
+        { 
+            if (!isAttatchedToPlayer)
+            {
+                bool isInrange = Vector2.Distance(transform.position, playerNode.transform.position) <= detectionDist;
+                return isInrange;
+            } else
+            {
+                return false;
+            }
+        } 
+    }
+    public List<Node> Connections { 
+        get {
+            List<Node> returnList = new List<Node>();
+            returnList.AddRange(staticConnections);
+            if (inPlayerRange)
+            {
+                returnList.Add(playerNode);
+            }
+            return returnList;
+        } 
+    }
+
+    public static Node playerNode;
+
+    private void Start()
+    {
+        if (isAttatchedToPlayer)
+        {
+            playerNode = this;
+        }
+    }
 
     private void OnDrawGizmos()
     {
-        foreach(Node node in connections)
+        Gizmos.color = Color.blue;
+        if (isAttatchedToPlayer)
         {
-            Gizmos.color = Color.blue;
+            playerNode = this;
+        } else
+        {
+            if (inPlayerRange)
+            {
+                Gizmos.DrawLine(transform.position, playerNode.transform.position);
+            }
+        }
+        foreach (Node node in staticConnections)
+        {
             Gizmos.DrawLine(transform.position, node.transform.position);
         }
     }

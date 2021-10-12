@@ -61,18 +61,6 @@ public class Movement : MonoBehaviour
                 y = Mathf.Clamp(dir.y, -initialSpeed, initialSpeed);
             }
             #endregion
-            /*#region Touch Controls
-            if (x == 0 && y == 0)
-            {
-                if (Input.touchCount > 0)
-                {
-                    Vector2 finger = Input.GetTouch(0).position;
-                    Vector2 dir = new Vector2(finger.x - transform.position.x, finger.y - transform.position.y);
-                    x = Mathf.Clamp(dir.x, -initialSpeed, initialSpeed);
-                    y = Mathf.Clamp(dir.y, -initialSpeed, initialSpeed);
-                }
-            }
-            #endregion*/
         }
 
         //Actually move

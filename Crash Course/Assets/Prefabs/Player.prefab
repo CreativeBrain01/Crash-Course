@@ -31,7 +31,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6817237053298732689}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -145,14 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61865073067a1414d98d134bdeec6224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scooterSprite: {fileID: 21300000, guid: 45025033c7e10ea48a61f700abb04149, type: 3}
-  quadSprite: {fileID: 21300000, guid: 53fe1c4b230f3114db44daa147577260, type: 3}
-  motorcycleSprite: {fileID: 21300000, guid: a99e48e55ab4f2940beaf6a2728d08ae, type: 3}
-  taxiSprite: {fileID: 21300000, guid: 9860c60721f0fc645a806dc7903abb64, type: 3}
-  busSprite: {fileID: 21300000, guid: 644fb2449bb1d6f40ad6a83f733277b4, type: 3}
-  truckSprite: {fileID: 21300000, guid: 1ce477d7cecc5ad429af702046d27078, type: 3}
-  trailerSprite: {fileID: 21300000, guid: 39cf191b2347fab48aa6f2c35381c149, type: 3}
-  trailerSprite2: {fileID: 21300000, guid: a5bca5d17a0514c4cb63f5f30ca5cdd6, type: 3}
 --- !u!114 &3888903470267747710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +162,48 @@ MonoBehaviour:
   downKeys: 7300000012010000
   leftKeys: 6100000014010000
   rightKeys: 6400000013010000
+--- !u!1 &4031763511045275013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6817237053298732689}
+  - component: {fileID: 4496913153366794319}
+  m_Layer: 0
+  m_Name: PNode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6817237053298732689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031763511045275013}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3888903470267747711}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4496913153366794319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031763511045275013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8e4738747f32e9468ae94d593f7c02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAttatchedToPlayer: 1
+  connections: []

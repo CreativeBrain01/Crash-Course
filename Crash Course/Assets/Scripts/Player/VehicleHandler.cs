@@ -12,26 +12,9 @@ public class VehicleHandler : MonoBehaviour
         Taxi,
         Bus,
         Truck,
-        Trailer
+        Camper
     }
     eVehicle vehicle = eVehicle.Scooter;
-
-    [SerializeField]
-    Sprite scooterSprite;
-    [SerializeField]
-    Sprite quadSprite;
-    [SerializeField]
-    Sprite motorcycleSprite;
-    [SerializeField]
-    Sprite taxiSprite;
-    [SerializeField]
-    Sprite busSprite;
-    [SerializeField]
-    Sprite truckSprite;
-    [SerializeField]
-    Sprite trailerSprite;
-    [SerializeField]
-    Sprite trailerSprite2;
 
     float speed = 1;
     public float Speed { get { return speed; } }
@@ -49,37 +32,37 @@ public class VehicleHandler : MonoBehaviour
             case eVehicle.Scooter:
                 speed = 1;
                 durability = 1;
-                sr.sprite = scooterSprite;
+                sr.sprite = SpriteStorage.scooter;
                 break;
             case eVehicle.Quad:
                 speed = 1;
                 durability = 2;
-                sr.sprite = quadSprite;
+                sr.sprite = SpriteStorage.quad;
                 break;
             case eVehicle.Motorcycle:
                 speed = 4;
                 durability = 1;
-                sr.sprite = motorcycleSprite;
+                sr.sprite = SpriteStorage.motorcycle;
                 break;
             case eVehicle.Taxi:
                 speed = 2;
                 durability = 2;
-                sr.sprite = taxiSprite;
+                sr.sprite = SpriteStorage.taxi;
                 break;
             case eVehicle.Bus:
                 speed = 2;
                 durability = 3;
-                sr.sprite = busSprite;
+                sr.sprite = SpriteStorage.bus;
                 break;
             case eVehicle.Truck:
                 speed = 3;
                 durability = 2;
-                sr.sprite = truckSprite;
+                sr.sprite = SpriteStorage.truck;
                 break;
-            case eVehicle.Trailer:
+            case eVehicle.Camper:
                 speed = 2;
                 durability = 4;
-                sr.sprite = trailerSprite;
+                sr.sprite = SpriteStorage.camper;
                 break;
             default:
                 break;
