@@ -23,6 +23,7 @@ public class VehicleHandler : MonoBehaviour
     void Start()
     {
         int index = PlayerPrefs.GetInt("vehicle");
+        index = 2;
         vehicle = (eVehicle)index;
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();

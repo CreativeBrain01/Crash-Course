@@ -44,7 +44,7 @@ public class BasicAI : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (next != null)
+        if (next != null && this.isActiveAndEnabled)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, next.transform.position);

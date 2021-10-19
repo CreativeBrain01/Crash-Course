@@ -8,8 +8,6 @@ public class RunningAI : BasicAI
     {
         rb = GetComponent<Rigidbody2D>();
 
-        SelectVehicle();
-
         SetFirstNode();
     }
 
@@ -84,9 +82,10 @@ public class RunningAI : BasicAI
             } else
             {
                 counter++;
-                if (counter > connections.Count - 1)
-                {
+                if (counter >= connections.Count)
+                {   
                     counter = 0;
+                    //foundTarget = false;
                     GetComponent<BasicAI>().enabled = true;
                     this.enabled = false;
                 }

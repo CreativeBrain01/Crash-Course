@@ -9,7 +9,7 @@ public class Node : MonoBehaviour
     [SerializeField]
     List<Node> staticConnections = new List<Node>();
 
-    float detectionDist = 4;
+    float detectionDist = 2;
     bool inPlayerRange { 
         get 
         { 
