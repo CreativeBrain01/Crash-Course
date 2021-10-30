@@ -117,4 +117,20 @@ public class BasicAI : MonoBehaviour
         }
         if (closestNode != null) next = closestNode;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (GetType() == typeof(ChasingAI))
+            {
+                //End game
+            }
+            else
+            {
+                FindObjectOfType<GameController>().obstacleScore += 100;
+                Destroy(this.gameObject);
+            }
+        }
+    }
 }

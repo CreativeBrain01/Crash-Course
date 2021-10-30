@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ButtonFunctions : MonoBehaviour
 {
+    int MapCount = 1;
+
+    private void Start()
+    {
+        DataProcessing.LoadData();
+    }
+
     public void Play()
     {
         if (PlayerPrefs.GetInt("ViewedInstructions") < 1)
@@ -41,9 +49,10 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Exit()
     {
+        PlayerPrefs.Save();
+
         if (SceneManager.GetActiveScene().name == "Main Menu")
         {
-            PlayerPrefs.Save();
             Application.Quit();
         }
         else if (SceneManager.GetActiveScene().name == "Instructions" && PlayerPrefs.GetInt("ViewedInstructions") == 2)
@@ -58,6 +67,8 @@ public class ButtonFunctions : MonoBehaviour
 
     private void GoToMap()
     {
-        SceneManager.LoadScene("Map1");
+        int mapNum = Random.Range(1, MapCount);
+
+        SceneManager.LoadScene("Map" + mapNum);
     }
 }

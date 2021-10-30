@@ -89,6 +89,7 @@ public class RunningAI : BasicAI
                     GetComponent<BasicAI>().enabled = true;
                     this.enabled = false;
                 }
+                previous = next;
                 next = connections[counter];
             }
         }

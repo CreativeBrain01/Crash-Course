@@ -19,11 +19,12 @@ public class VehicleHandler : MonoBehaviour
     float speed = 1;
     public float Speed { get { return speed; } }
     int durability = 1;
+    public float Durability { get { return durability; } }
+
 
     void Start()
     {
         int index = PlayerPrefs.GetInt("vehicle");
-        index = 2;
         vehicle = (eVehicle)index;
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
