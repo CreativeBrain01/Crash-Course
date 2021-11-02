@@ -27,6 +27,12 @@ public class ShopHandler : MonoBehaviour
     TMP_Text money_Txt;
 
     [SerializeField]
+    Slider durability_Sldr;
+
+    [SerializeField]
+    Slider speed_Sldr;
+
+    [SerializeField]
     Button confirm_btn;
 
     public VehicleHandler.eVehicle currentVehicle;
@@ -89,11 +95,17 @@ public class ShopHandler : MonoBehaviour
             {
                 confirm_btn.GetComponentInChildren<Text>().text = "Select";
             }
-            
         } else
         {
             confirm_btn.GetComponentInChildren<Text>().text = "$ " + vd.Cost;
         }
+
+        int d = VehicleHandler.VehicleToDurability(vd.Vehicle);
+        int s = VehicleHandler.VehicleToSpeed(vd.Vehicle);
+        durability_Sldr.value = d;
+        durability_Sldr.GetComponentInChildren<TMP_Text>().text = "Durability: " + d;
+        speed_Sldr.value = s;
+        speed_Sldr.GetComponentInChildren<TMP_Text>().text = "Speed: " + s;
     }
 
     public void OnSelect()

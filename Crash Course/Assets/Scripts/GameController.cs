@@ -25,11 +25,14 @@ public class GameController : MonoBehaviour
 
     public int Score { get { return (Mathf.RoundToInt(stopWatch) * 10) + obstacleScore; } }
 
-    bool gameOver = false;
+    public bool gameOver = false;
+
+    public static GameController Instance;
 
     void Start()
     {
         timer = timerStart;
+        Instance = this;
     }
 
     void Update()

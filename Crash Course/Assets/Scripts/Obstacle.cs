@@ -12,7 +12,7 @@ public class Obstacle : MonoBehaviour
     {
         if (collision.GetComponent<Movement>())
         {
-            FindObjectOfType<GameController>().obstacleScore += worth;
+            GameController.Instance.obstacleScore += worth;
             Destroy(transform.gameObject);
         }
     }

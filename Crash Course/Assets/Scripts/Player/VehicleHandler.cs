@@ -16,6 +16,67 @@ public class VehicleHandler : MonoBehaviour
     }
     eVehicle vehicle = eVehicle.Scooter;
 
+    public static int VehicleToDurability(eVehicle vehicle)
+    {
+        switch (vehicle)
+        {
+            case eVehicle.Scooter:
+                return 1;
+
+            case eVehicle.Quad:
+                return 2;
+
+            case eVehicle.Motorcycle:
+                return 1;
+
+            case eVehicle.Taxi:
+                return 2;
+
+            case eVehicle.Bus:
+                return 3;
+
+            case eVehicle.Truck:
+                return 2;
+
+            case eVehicle.Camper:
+                return 4;
+
+            default:
+                return 0;
+        }
+    }
+
+    public static int VehicleToSpeed(eVehicle vehicle)
+    {
+        switch (vehicle)
+        {
+            case eVehicle.Scooter:
+                return 1;
+
+            case eVehicle.Quad:
+                return 1;
+
+            case eVehicle.Motorcycle:
+                return 4;
+
+            case eVehicle.Taxi:
+                return 2;
+
+            case eVehicle.Bus:
+                return 2;
+
+            case eVehicle.Truck:
+                return 3;
+
+            case eVehicle.Camper:
+                return 2;
+
+            default:
+                return 0;
+                break;
+        }
+    }
+
     float speed = 1;
     public float Speed { get { return speed; } }
     int durability = 1;
@@ -29,41 +90,30 @@ public class VehicleHandler : MonoBehaviour
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
+        speed = VehicleToSpeed(vehicle);
+        durability = VehicleToDurability(vehicle);
+
         switch (vehicle)
         {
             case eVehicle.Scooter:
-                speed = 1;
-                durability = 1;
                 sr.sprite = SpriteStorage.scooter;
                 break;
             case eVehicle.Quad:
-                speed = 1;
-                durability = 2;
                 sr.sprite = SpriteStorage.quad;
                 break;
             case eVehicle.Motorcycle:
-                speed = 4;
-                durability = 1;
                 sr.sprite = SpriteStorage.motorcycle;
                 break;
             case eVehicle.Taxi:
-                speed = 2;
-                durability = 2;
                 sr.sprite = SpriteStorage.taxi;
                 break;
             case eVehicle.Bus:
-                speed = 2;
-                durability = 3;
                 sr.sprite = SpriteStorage.bus;
                 break;
             case eVehicle.Truck:
-                speed = 3;
-                durability = 2;
                 sr.sprite = SpriteStorage.truck;
                 break;
             case eVehicle.Camper:
-                speed = 2;
-                durability = 4;
                 sr.sprite = SpriteStorage.camper;
                 break;
             default:
@@ -71,9 +121,28 @@ public class VehicleHandler : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (durability <= 0)
+        {
+            GameController.Instance.gameOver = true;
+        }
+    }
+
     private void OnApplicationQuit()
     {
         PlayerPrefs.SetInt("vehicle", (int)vehicle);
         PlayerPrefs.Save();
+    }
+
+    public void TakeDamage()
+    {
+        float chance = (durability * 20) + 10;
+
+        int value = Random.Range(0, 100);
+        if (value >= chance)
+        {
+            durability--;
+        }
     }
 }

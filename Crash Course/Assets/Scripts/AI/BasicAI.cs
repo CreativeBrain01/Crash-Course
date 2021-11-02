@@ -124,13 +124,13 @@ public class BasicAI : MonoBehaviour
         {
             if (GetType() == typeof(ChasingAI))
             {
-                //End game
+                collision.GetComponent<VehicleHandler>().TakeDamage();
             }
             else
             {
-                FindObjectOfType<GameController>().obstacleScore += 100;
-                Destroy(this.gameObject);
+                GameController.Instance.obstacleScore += 100;
             }
+            Destroy(this.gameObject);
         }
     }
 }
