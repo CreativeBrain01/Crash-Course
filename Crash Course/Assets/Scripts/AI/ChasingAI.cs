@@ -11,6 +11,8 @@ public class ChasingAI : BasicAI
     {
         rb = GetComponent<Rigidbody2D>();
 
+        SelectVehicle();
+
         SetFirstNode();
         connections.Add(next);
 
@@ -19,9 +21,9 @@ public class ChasingAI : BasicAI
 
     void Update()
     {
-        target = Node.playerNode;
         if (Vector2.Distance(transform.position, next.transform.position) < 0.5)
         {
+            target = Node.playerNode;
             bool nextIsTarget = false;
             bool foundTarget = false;
             Node current = next;

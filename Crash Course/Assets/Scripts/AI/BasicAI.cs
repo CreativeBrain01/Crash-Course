@@ -109,7 +109,7 @@ public class BasicAI : MonoBehaviour
         foreach (Node node in nodes)
         {
             float dist = Vector2.Distance(transform.position, node.transform.position);
-            if (dist < shortDist)
+            if (dist < shortDist && dist != 0)
             {
                 shortDist = dist;
                 closestNode = node;
@@ -125,6 +125,11 @@ public class BasicAI : MonoBehaviour
             if (GetType() == typeof(ChasingAI))
             {
                 collision.GetComponent<VehicleHandler>().TakeDamage();
+            }
+            else if (GetType() == typeof(RunningAI))
+            {
+                GameController.Instance.AddTime(2);
+                GameController.Instance.obstacleScore += 200;
             }
             else
             {

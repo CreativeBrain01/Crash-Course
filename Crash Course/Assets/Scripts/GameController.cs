@@ -18,6 +18,11 @@ public class GameController : MonoBehaviour
 
     float timer;
 
+    public void AddTime(float t)
+    {
+        timer += t;
+    }
+
     //this value is used to help determine score.
     float stopWatch = 0;
     

@@ -10,8 +10,14 @@ public class EnemySpawns : MonoBehaviour
     GameObject enemyPrefab;
     [SerializeField]
     GameObject enemyParent;
+    [SerializeField]
+    GameObject targetPrefab;
+
+    public int targetCount { get { return GameObject.FindGameObjectWithTag("Target") ? 1 : 0; } }
 
     List<Node> validNodes = new List<Node>();
+
+    
 
     private void Update()
     {
@@ -38,6 +44,21 @@ public class EnemySpawns : MonoBehaviour
 
                 Instantiate(enemyPrefab, validNodes[index].transform.position, validNodes[index].transform.rotation, enemyParent.transform);
             }
+        }
+
+        if (targetCount <= 0)
+        {
+            ObstacleSpawner[] spawners = FindObjectsOfType<ObstacleSpawner>();
+
+            int index;
+            do
+            {
+                index = Random.Range(0, spawners.Length);
+            } while (spawners[index] != null && Vector2.Distance(spawners[index].transform.position, Node.playerNode.transform.position) <= 1);
+
+            ObstacleSpawner spawner = spawners[index];
+
+            Instantiate(targetPrefab, spawner.transform.position, spawner.transform.rotation, enemyParent.transform);
         }
     }
 }

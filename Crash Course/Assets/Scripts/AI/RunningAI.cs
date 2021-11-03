@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class RunningAI : BasicAI
 {
+    public List<Node> connections = new List<Node>();
+    Node target;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
+        SelectVehicle();
+
         SetFirstNode();
+        connections.Add(next);
     }
 
-    public List<Node> connections = new List<Node>();
-    bool foundTarget = false;
-    int counter = 0;
+    
     void Update()
     {
-        if (!foundTarget)
+        float d = Vector2.Distance(transform.position, next.transform.position);
+        if (d < 0.5)
         {
             #region find the node farthest from the player
-            Node target = null;
+
             float maxDist = float.MinValue;
             GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
             foreach (Node node in FindObjectsOfType<Node>())
@@ -33,65 +38,70 @@ public class RunningAI : BasicAI
             }
             #endregion
 
-            #region find connection that isnt either the player or the one it was already going to
-            Node current = null;
-            for (int i = 0; i < next.Connections.Count; i++)
-            {
-                if (next.Connections[i] != Node.playerNode && next.Connections[i] != previous)
-                {
-                    current = next.Connections[i];
-                    break;
-                }
-            }
-            #endregion
+            bool nextIsTarget = false;
+            bool foundTarget = false;
+            Node current = next;
+            List<Node> temp = new List<Node>();
 
-            #region create list of points that need to be traveled to
-            Node prev2 = next;
-
-            float infiniteSafety1 = 0;
+            int overflowSafety = 0;
             do
             {
-                infiniteSafety1++;
-                float infinitySafety2 = 0;
-                do
+                overflowSafety++;
+                bool hasAdded = false;
+                foreach (Node node in current.Connections)
                 {
-                    infinitySafety2++;
-                    for (int i = 0; i < current.Connections.Count; i++)
+                    if (node == previous)
                     {
-                        if (current.Connections[i] == target)
+                        continue;
+                    }
+                    else if (node == target)
+                    {
+                        if (temp.Count <= 0)
                         {
-                            connections.Add(current);
+                            nextIsTarget = true;
                             foundTarget = true;
-                            break;
-                        } else if (current.Connections[i] != Node.playerNode && current.Connections[i] != previous && !connections.Contains(current.Connections[i]))
+                        }
+                        else
                         {
-                            connections.Add(current);
-                            current = current.Connections[i];
-                            continue;
+                            foundTarget = true;
+                            temp.Add(target);
+                            break;
                         }
                     }
-                } while (current == previous || connections.Contains(current) && !foundTarget && infinitySafety2 < 200);
-            } while (!foundTarget && infiniteSafety1 < 200);
-            next = connections[0];
-            #endregion
-        } else
-        {
-            if (Vector2.Distance(transform.position, connections[counter].transform.position) > 0.5)
-            {
-                BasicMovement();
-            } else
-            {
-                counter++;
-                if (counter >= connections.Count)
-                {   
-                    counter = 0;
-                    //foundTarget = false;
-                    GetComponent<BasicAI>().enabled = true;
-                    this.enabled = false;
+                    else if
+                          (Vector2.Distance(node.transform.position, target.transform.position)
+                          <=
+                          Vector2.Distance(current.transform.position, target.transform.position))
+                    {
+                        temp.Add(node);
+                        hasAdded = true;
+                        current = node;
+                        break;
+                    }
+                    else
+                    {
+                        if (node == current.Connections[current.Connections.Count - 1] && !hasAdded)
+                        {
+                            temp.Add(node);
+                        }
+                    }
                 }
-                previous = next;
-                next = connections[counter];
+            } while (!foundTarget && overflowSafety < 200);
+
+            if (!nextIsTarget)
+            {
+                connections = temp;
             }
+            else
+            {
+                connections.Clear();
+                connections.Add(target);
+            }
+        }
+        else
+        {
+            next = connections[0];
+            BasicMovement();
         }
     }
 }

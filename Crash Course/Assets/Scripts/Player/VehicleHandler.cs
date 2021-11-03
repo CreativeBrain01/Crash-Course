@@ -73,7 +73,6 @@ public class VehicleHandler : MonoBehaviour
 
             default:
                 return 0;
-                break;
         }
     }
 

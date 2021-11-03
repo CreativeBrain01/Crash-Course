@@ -13,6 +13,7 @@ public class Obstacle : MonoBehaviour
         if (collision.GetComponent<Movement>())
         {
             GameController.Instance.obstacleScore += worth;
+            collision.attachedRigidbody.velocity = new Vector3(0, 0, 0);
             Destroy(transform.gameObject);
         }
     }
