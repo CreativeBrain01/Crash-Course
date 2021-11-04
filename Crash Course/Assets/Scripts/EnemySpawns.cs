@@ -7,16 +7,20 @@ public class EnemySpawns : MonoBehaviour
     [SerializeField]
     int minEnemies = 5;
     [SerializeField]
-    GameObject enemyPrefab;
-    [SerializeField]
     GameObject enemyParent;
     [SerializeField]
+    GameObject policeSpawn;
+
+    [SerializeField]
+    GameObject enemyPrefab;
+    [SerializeField]
     GameObject targetPrefab;
+    [SerializeField]
+    GameObject policePrefab;
 
     public int targetCount { get { return GameObject.FindGameObjectWithTag("Target") ? 1 : 0; } }
 
     List<Node> validNodes = new List<Node>();
-
     
 
     private void Update()
@@ -59,6 +63,11 @@ public class EnemySpawns : MonoBehaviour
             ObstacleSpawner spawner = spawners[index];
 
             Instantiate(targetPrefab, spawner.transform.position, spawner.transform.rotation, enemyParent.transform);
+        }
+
+        if (GameController.Instance.Score >= 1000 && FindObjectsOfType<ChasingAI>().Length <= 0)
+        {
+            Instantiate(policePrefab, policeSpawn.transform.position, policeSpawn.transform.rotation, policeSpawn.transform);
         }
     }
 }

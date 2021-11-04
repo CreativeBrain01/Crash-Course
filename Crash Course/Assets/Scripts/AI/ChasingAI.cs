@@ -11,8 +11,6 @@ public class ChasingAI : BasicAI
     {
         rb = GetComponent<Rigidbody2D>();
 
-        SelectVehicle();
-
         SetFirstNode();
         connections.Add(next);
 
