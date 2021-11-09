@@ -42,6 +42,11 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene("Settings");
     }
 
+    public void Scoreboard()
+    {
+        SceneManager.LoadScene("Scoreboard");
+    }
+
     public void Exit()
     {
         PlayerPrefs.Save();
