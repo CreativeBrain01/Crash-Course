@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Maps/Map1.unity
     guid: 2f9dd7b887ec1ca4eacad6f04da6b69b
+  - enabled: 1
+    path: Assets/Scenes/Menus/Scoreboard.unity
+    guid: e969f647b0d875c418603ba8fe601710
   m_configObjects: {}

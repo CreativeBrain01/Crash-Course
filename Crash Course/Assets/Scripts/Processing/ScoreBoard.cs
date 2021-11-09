@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ScoreBoard
 {
-    public Dictionary<string, int> scores = new Dictionary<string, int>();
+    public SortedList<int, string> scores = new SortedList<int, string>();
 }

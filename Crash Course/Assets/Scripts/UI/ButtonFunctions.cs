@@ -8,11 +8,6 @@ public class ButtonFunctions : MonoBehaviour
 {
     int MapCount = 1;
 
-    private void Start()
-    {
-        DataProcessing.LoadData();
-    }
-
     public void Play()
     {
         if (PlayerPrefs.GetInt("ViewedInstructions") < 1)

@@ -57,7 +57,16 @@ public class GameController : MonoBehaviour
         } else
         {
             PlayerPrefs.SetInt("HubCaps", PlayerPrefs.GetInt("HubCaps") + (Score / 100));
-            SceneManager.LoadScene("Main Menu");
+            PlayerPrefs.Save();
+
+            if (PlayerPrefs.GetInt("UseScores") == 0) //UseScores 0 = true 1 = false
+            {
+                SceneManager.LoadScene("Scoreboard");
+            }
+            else
+            {
+                SceneManager.LoadScene("Main Menu");
+            }
         }
     }
 }
