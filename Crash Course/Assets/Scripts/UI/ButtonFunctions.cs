@@ -6,7 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class ButtonFunctions : MonoBehaviour
 {
+    [SerializeField]
+    GameObject musicHandler;
+
     int MapCount = 1;
+
+    public void Start()
+    {
+        if (!FindObjectOfType<MusicHandler>())
+        {
+            Instantiate(musicHandler, null, true);
+        }
+    }
 
     public void Play()
     {

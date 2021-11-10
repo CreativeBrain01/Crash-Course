@@ -22,9 +22,12 @@ public class MusicHandler : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         audioSource = GetComponent<AudioSource>();
         audioSource.loop = true;
+        audioSource.clip = menuTheme;
+        audioSource.Play();
     }
 
     string prevScene = "MainMenu";
+
     void Update()
     {
         float volume = masterVolume * musicVolume;
@@ -33,22 +36,32 @@ public class MusicHandler : MonoBehaviour
 
         string currentScene = SceneManager.GetActiveScene().name;
 
-        if (prevScene != currentScene)
+        bool changeSong = false;
+        if ((prevScene.Contains("Map") && !currentScene.Contains("Map")) || 
+            (currentScene.Contains("Map") && !prevScene.Contains("Map")))
         {
-            audioSource.Stop();
+            changeSong = true;
+        }
 
+        if (changeSong)
+        {
             prevScene = currentScene;
             if (currentScene.Contains("Map"))
             {
+                audioSource.Stop();
                 audioSource.clip = gameTheme;
                 audioSource.time = 0;
+                audioSource.Play();
             }
             else
             {
-                if (audioSource.clip != menuTheme) audioSource.clip = menuTheme;
+                if (audioSource.clip != menuTheme)
+                {
+                    audioSource.Stop();
+                    audioSource.clip = menuTheme;
+                    audioSource.Play();
+                }
             }
-
-            audioSource.Play();
         }
     }
 }

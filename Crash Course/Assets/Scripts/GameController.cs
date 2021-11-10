@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour
     {
         timer = timerStart;
         Instance = this;
+        ResetScore();
     }
 
     void Update()
@@ -68,5 +69,11 @@ public class GameController : MonoBehaviour
                 SceneManager.LoadScene("Main Menu");
             }
         }
+    }
+
+    public void ResetScore()
+    {
+        obstacleScore = 0;
+        stopWatch = 0;
     }
 }
