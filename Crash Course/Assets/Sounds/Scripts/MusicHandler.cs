@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(AudioSource))]
 public class MusicHandler : MonoBehaviour
 {
-    public float musicVolume { get { return PlayerPrefs.GetFloat("MusicVolume", 0.5f); } }
-    public float sfxVolume { get { return PlayerPrefs.GetFloat("SFXVolume", 0.5f); } }
-    public float masterVolume { get { return PlayerPrefs.GetFloat("MasterVolume", 1.0f); } }
+    public static float masterVolume { get { return PlayerPrefs.GetFloat("MasterVolume", 1.0f); } }
+    public static float musicVolume { get { return PlayerPrefs.GetFloat("MusicVolume", 0.5f); } }
+    public static float sfxVolume { get { return PlayerPrefs.GetFloat("SFXVolume", 0.5f); } }
 
     [SerializeField]
     AudioClip menuTheme;

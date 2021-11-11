@@ -76,6 +76,36 @@ public class VehicleHandler : MonoBehaviour
         }
     }
 
+    public static Sprite VehicleToSprite(eVehicle vehicle)
+    {
+        switch (vehicle)
+        {
+            case eVehicle.Scooter:
+                return SpriteStorage.scooter;
+
+            case eVehicle.Quad:
+                return SpriteStorage.quad;
+
+            case eVehicle.Motorcycle:
+                return SpriteStorage.motorcycle;
+
+            case eVehicle.Taxi:
+                return SpriteStorage.taxi;
+
+            case eVehicle.Bus:
+                return SpriteStorage.bus;
+
+            case eVehicle.Truck:
+                return SpriteStorage.truck;
+
+            case eVehicle.Camper:
+                return SpriteStorage.camper;
+
+            default:
+                return null;
+        }
+    }
+
     float speed = 1;
     public float Speed { get { return speed; } }
     int durability = 1;
@@ -91,33 +121,13 @@ public class VehicleHandler : MonoBehaviour
 
         speed = VehicleToSpeed(vehicle);
         durability = VehicleToDurability(vehicle);
+        sr.sprite = VehicleToSprite(vehicle);
 
-        switch (vehicle)
-        {
-            case eVehicle.Scooter:
-                sr.sprite = SpriteStorage.scooter;
-                break;
-            case eVehicle.Quad:
-                sr.sprite = SpriteStorage.quad;
-                break;
-            case eVehicle.Motorcycle:
-                sr.sprite = SpriteStorage.motorcycle;
-                break;
-            case eVehicle.Taxi:
-                sr.sprite = SpriteStorage.taxi;
-                break;
-            case eVehicle.Bus:
-                sr.sprite = SpriteStorage.bus;
-                break;
-            case eVehicle.Truck:
-                sr.sprite = SpriteStorage.truck;
-                break;
-            case eVehicle.Camper:
-                sr.sprite = SpriteStorage.camper;
-                break;
-            default:
-                break;
-        }
+        float r = PlayerPrefs.GetFloat("color-Red", 1);
+        float g = PlayerPrefs.GetFloat("color-Green", 1);
+        float b =PlayerPrefs.GetFloat("color-Blue", 1);
+
+        sr.color = new Color(r, g, b);
     }
 
     private void Update()

@@ -13,9 +13,17 @@ public class ButtonFunctions : MonoBehaviour
 
     public void Start()
     {
-        if (!FindObjectOfType<MusicHandler>())
+        if (!FindObjectOfType<MusicHandler>() && musicHandler != null)
         {
             Instantiate(musicHandler, null, true);
+        }
+
+        if (SceneManager.GetActiveScene().name == "Settings")
+        {
+            GameObject.FindGameObjectWithTag("MasterVol").GetComponent<Slider>().value = MusicHandler.masterVolume;
+            GameObject.FindGameObjectWithTag("MusicVol").GetComponent<Slider>().value = MusicHandler.musicVolume;
+            GameObject.FindGameObjectWithTag("SFXVol").GetComponent<Slider>().value = MusicHandler.sfxVolume;
+            GameObject.FindGameObjectWithTag("ScoreSkip").GetComponent<Toggle>().isOn = PlayerPrefs.GetInt("UseScores", 1) == 1;
         }
     }
 
@@ -74,6 +82,26 @@ public class ButtonFunctions : MonoBehaviour
         {
             SceneManager.LoadScene("Main Menu");
         }
+    }
+
+    public void MastVol(float vol)
+    {
+        PlayerPrefs.SetFloat("MasterVolume", vol);
+    }
+
+    public void MusicVol(float vol)
+    {
+        PlayerPrefs.SetFloat("MusicVolume", vol);
+    }
+
+    public void SFXVol(float vol)
+    {
+        PlayerPrefs.SetFloat("SFXVolume", vol);
+    }
+
+    public void ScoreSkip(bool skip)
+    {
+        PlayerPrefs.SetInt("UseScores", skip ? 0 : 1);
     }
 
     private void GoToMap()

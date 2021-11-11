@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.SetInt("HubCaps", PlayerPrefs.GetInt("HubCaps") + (Score / 100));
             PlayerPrefs.Save();
 
-            if (PlayerPrefs.GetInt("UseScores") == 0) //UseScores 0 = true 1 = false
+            if (PlayerPrefs.GetInt("UseScores", 1) == 1) //UseScores 1 = true 0 = false
             {
                 SceneManager.LoadScene("Scoreboard");
             }
