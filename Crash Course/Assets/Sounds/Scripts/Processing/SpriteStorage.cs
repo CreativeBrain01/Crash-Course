@@ -12,4 +12,5 @@ public static class SpriteStorage
     public static Sprite truck = Resources.Load("Vehicles/Truck", typeof(Sprite)) as Sprite;
     public static Sprite camper = Resources.Load("Vehicles/Camper", typeof(Sprite)) as Sprite;
     public static Sprite trailer = Resources.Load("Vehicles/Trailer", typeof(Sprite)) as Sprite;
+    public static Sprite camperWithTrailer = Resources.Load("Vehicles/CamperWithTrailer", typeof(Sprite)) as Sprite;
 }

@@ -110,14 +110,20 @@ public class VehicleHandler : MonoBehaviour
     public float Speed { get { return speed; } }
     int durability = 1;
     public float Durability { get { return durability; } }
+    public int lives = 1;
 
-
+    SpriteRenderer sr;
     void Start()
     {
         int index = PlayerPrefs.GetInt("vehicle");
         vehicle = (eVehicle)index;
 
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (vehicle == eVehicle.Camper)
+        {
+            lives = 2;
+        }
+
+        sr = GetComponent<SpriteRenderer>();
 
         speed = VehicleToSpeed(vehicle);
         durability = VehicleToDurability(vehicle);
@@ -132,9 +138,15 @@ public class VehicleHandler : MonoBehaviour
 
     private void Update()
     {
-        if (durability <= 0)
+        if (lives >= 2)
         {
-            GameController.Instance.gameOver = true;
+            sr.sprite = SpriteStorage.camperWithTrailer;
+        } else
+        {
+            if ((eVehicle)PlayerPrefs.GetInt("vehicle") == eVehicle.Camper)
+            {
+                sr.sprite = SpriteStorage.camper;
+            }
         }
     }
 
@@ -152,6 +164,16 @@ public class VehicleHandler : MonoBehaviour
         if (value >= chance)
         {
             durability--;
+
+            if (durability <= 0)
+            {
+                lives--;
+
+                if (lives <= 0)
+                {
+                    GameController.Instance.gameOver = true;
+                }
+            }
         }
     }
 }
