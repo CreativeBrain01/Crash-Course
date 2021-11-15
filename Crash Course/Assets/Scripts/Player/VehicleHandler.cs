@@ -165,6 +165,8 @@ public class VehicleHandler : MonoBehaviour
         {
             durability--;
 
+            FindObjectOfType<SFXHandler>().PlayDamageSound();
+
             if (durability <= 0)
             {
                 lives--;

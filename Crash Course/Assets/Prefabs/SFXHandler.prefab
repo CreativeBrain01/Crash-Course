@@ -141,4 +141,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonSFX: {fileID: 8300000, guid: dec73d95f7bc68445bb0c70c145088da, type: 3}
-  damageSFX: {fileID: 0}
+  damageSFX: {fileID: 8300000, guid: 98fb7f69f1617254098e3fd92d3fcde7, type: 3}
