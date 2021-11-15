@@ -36,13 +36,13 @@ public class ScoreboardController : MonoBehaviour
 
         scoreBoard.scores.Capacity = 10;
 
-        if (GameController.Instance != null)
+        /*if (GameController.Instance != null)
         {
             if (GameController.Instance.Score != 0)
             {
 
             }
-        }
+        }*/
 
         UpdateScoreboard();
     }

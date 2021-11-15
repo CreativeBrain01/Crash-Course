@@ -8,7 +8,6 @@ public class MusicHandler : MonoBehaviour
 {
     public static float masterVolume { get { return PlayerPrefs.GetFloat("MasterVolume", 1.0f); } }
     public static float musicVolume { get { return PlayerPrefs.GetFloat("MusicVolume", 0.5f); } }
-    public static float sfxVolume { get { return PlayerPrefs.GetFloat("SFXVolume", 0.5f); } }
 
     [SerializeField]
     AudioClip menuTheme;
