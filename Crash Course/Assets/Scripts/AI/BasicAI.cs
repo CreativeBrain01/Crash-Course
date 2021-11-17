@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -9,6 +7,10 @@ public class BasicAI : MonoBehaviour
     protected Node previous;
 
     protected Rigidbody2D rb;
+
+    protected VehicleHandler.eVehicle vehicle;
+
+    public float speed = 3;
 
     void Start()
     {
@@ -60,7 +62,7 @@ public class BasicAI : MonoBehaviour
         y = Mathf.Clamp(dir.y, -1, 1);
 
         //Move
-        Vector2 movement = new Vector2(x, y) * 5;
+        Vector2 movement = new Vector2(x, y) * speed;
         rb.velocity = movement;
 
         //Rotate
@@ -71,34 +73,11 @@ public class BasicAI : MonoBehaviour
     protected void SelectVehicle()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        int index = Random.Range(1, 7);
+        int index = Random.Range(0, 7);
+        vehicle = (VehicleHandler.eVehicle)index;
 
-        switch (index)
-        {
-            case 1:
-                sr.sprite = SpriteStorage.scooter;
-                break;
-            case 2:
-                sr.sprite = SpriteStorage.quad;
-                break;
-            case 3:
-                sr.sprite = SpriteStorage.motorcycle;
-                break;
-            case 4:
-                sr.sprite = SpriteStorage.taxi;
-                break;
-            case 5:
-                sr.sprite = SpriteStorage.bus;
-                break;
-            case 6:
-                sr.sprite = SpriteStorage.truck;
-                break;
-            case 7:
-                sr.sprite = SpriteStorage.camper;
-                break;
-            default:
-                break;
-        }
+        sr.sprite = VehicleHandler.VehicleToSprite(vehicle);
+        speed = VehicleHandler.VehicleToSpeed(vehicle);
     }
 
     protected void SetFirstNode()

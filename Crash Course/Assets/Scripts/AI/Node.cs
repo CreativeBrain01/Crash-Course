@@ -13,7 +13,7 @@ public class Node : MonoBehaviour
     bool inPlayerRange { 
         get 
         { 
-            if (!isAttatchedToPlayer)
+            if (!isAttatchedToPlayer && FindObjectOfType<Movement>())
             {
                 bool isInrange = Vector2.Distance(transform.position, playerNode.transform.position) <= detectionDist;
                 return isInrange;
