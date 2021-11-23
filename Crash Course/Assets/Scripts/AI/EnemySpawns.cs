@@ -21,7 +21,6 @@ public class EnemySpawns : MonoBehaviour
     public int targetCount { get { return GameObject.FindGameObjectWithTag("Target") ? 1 : 0; } }
 
     List<Node> validNodes = new List<Node>();
-    
 
     private void Update()
     {
@@ -65,9 +64,12 @@ public class EnemySpawns : MonoBehaviour
             Instantiate(targetPrefab, spawner.transform.position, spawner.transform.rotation, enemyParent.transform);
         }
 
-        if (GameController.Instance.Score >= 1000 && FindObjectsOfType<ChasingAI>().Length <= 0)
+        if (policeSpawn)
         {
-            Instantiate(policePrefab, policeSpawn.transform.position, policeSpawn.transform.rotation, policeSpawn.transform);
+            if (GameController.Instance.Score >= 4500 && FindObjectsOfType<ChasingAI>().Length <= 0)
+            {
+                Instantiate(policePrefab, policeSpawn.transform.position, policeSpawn.transform.rotation, policeSpawn.transform);
+            }
         }
     }
 }

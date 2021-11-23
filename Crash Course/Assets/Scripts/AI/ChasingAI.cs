@@ -15,6 +15,8 @@ public class ChasingAI : BasicAI
         connections.Add(next);
 
         target = Node.playerNode;
+
+        speed = 4;
     }
 
     void Update()

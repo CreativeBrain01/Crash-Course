@@ -43,6 +43,10 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        /*if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameOver = true;
+        }*/
         if (!gameOver)
         {
             timerTxt.text = "Time: " + Mathf.RoundToInt(timer);

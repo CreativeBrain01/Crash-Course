@@ -11,7 +11,7 @@ public class ButtonFunctions : MonoBehaviour
     [SerializeField]
     GameObject sfxHandler;
 
-    int MapCount = 1;
+    int MapCount = 3;
 
     public void Start()
     {
@@ -131,7 +131,7 @@ public class ButtonFunctions : MonoBehaviour
 
     private void GoToMap()
     {
-        int mapNum = Random.Range(1, MapCount);
+        int mapNum = Random.Range(0, MapCount) + 1;
 
         FindObjectOfType<SFXHandler>().PlayButtonSFX();
 
