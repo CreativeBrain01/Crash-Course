@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Node : MonoBehaviour
 {
@@ -10,21 +11,25 @@ public class Node : MonoBehaviour
     List<Node> staticConnections = new List<Node>();
 
     float detectionDist = 2;
-    bool inPlayerRange { 
-        get 
-        { 
+    bool inPlayerRange
+    {
+        get
+        {
             if (!isAttatchedToPlayer && FindObjectOfType<Movement>())
             {
                 bool isInrange = Vector2.Distance(transform.position, playerNode.transform.position) <= detectionDist;
                 return isInrange;
-            } else
+            }
+            else
             {
                 return false;
             }
-        } 
+        }
     }
-    public List<Node> Connections { 
-        get {
+    public List<Node> Connections
+    {
+        get
+        {
             List<Node> returnList = new List<Node>();
             returnList.AddRange(staticConnections);
             if (inPlayerRange)
@@ -32,7 +37,7 @@ public class Node : MonoBehaviour
                 returnList.Add(playerNode);
             }
             return returnList;
-        } 
+        }
     }
 
     public static Node playerNode;
@@ -47,20 +52,25 @@ public class Node : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.green;
         if (isAttatchedToPlayer)
         {
             playerNode = this;
-        } else
+        }
+        else
         {
             if (inPlayerRange)
             {
                 Gizmos.DrawLine(transform.position, playerNode.transform.position);
             }
         }
-        foreach (Node node in staticConnections)
+        Gizmos.color = Color.yellow;
+        if (Selection.Contains(this.gameObject))
         {
-            Gizmos.DrawLine(transform.position, node.transform.position);
+            foreach (Node node in staticConnections)
+            {
+                Gizmos.DrawLine(transform.position, node.transform.position);
+            }
         }
     }
 }
